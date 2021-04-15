@@ -1,0 +1,41 @@
+--- 23S17.C	2009-08-10 09:46:52.000000000 +0900
++++ n-auto_23s17.c	2021-04-16 00:19:02.244017600 +0900
+@@ -323,12 +323,18 @@
+ 
+ 	output_high(IO_CS_PIN);
+ 	output_drive(IO_CS_PIN);
++	output_low(IO_CS_PIN);
++    
+ 	#ifndef IO_MULTIPLE_DEVICES
+ 	IO_WRITE_REGISTER(0x0A, 0xA2);	//IOCON's address is 0xA until IOCON.Bank is set                         
+ 	#else
+ 	IO_WRITE_REGISTER(IO_DEVICE_0, 0x0A, 0xAA);
+ 	#endif
+ 
++    for (int a = 0; a < 2; a++) {}
++    
++	output_high(IO_CS_PIN);
++
+ }
+ 
+ 
+@@ -362,6 +368,8 @@
+ 	spi_write(reg);
+ 	spi_write(data);
+ 	
++    for (int a = 0; a < 2; a++) {}
++    
+ 	output_high(IO_CS_PIN);
+ 
+ }
+@@ -396,6 +404,10 @@
+ 	
+ 	spi_write(reg);
+ 	retVal = spi_read(0);
++
++	
++	for (int a = 0; a < 2; a++) {}
++	
+ 	
+ 	output_high(IO_CS_PIN);
+ 	
